@@ -28,11 +28,13 @@ ChatterBox/
 - **Swagger** - Documentação automática da API
 - **Jest** - Framework de testes
 
-### Frontend (A implementar)
-- **React** 18.x
-- **Vite** 5.x
+### Frontend
+- **React** 19.x
+- **Vite** 7.x
 - **TailwindCSS** 3.x
 - **Socket.io Client** 4.x
+- **React Router** 7.x
+- **Axios** 1.x
 
 ## 📋 Pré-requisitos
 
@@ -71,17 +73,38 @@ npm install
 
 ## 🏃 Executando a aplicação
 
-### Opção 1: Com Docker (Recomendado)
+### Opção 1: Com Docker (Recomendado) 🐳
+
+**Rode toda a aplicação (frontend + backend + banco) com um único comando:**
 
 ```bash
 # Na raiz do projeto
-docker-compose up -d
+docker-compose up --build
+
+# Ou em background (detached mode)
+docker-compose up -d --build
 ```
 
-Serviços disponíveis:
-- **API**: http://localhost:3000/api
+**Serviços disponíveis:**
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:3000/api
 - **Swagger Docs**: http://localhost:3000/api/docs
-- **MongoDB**: localhost:27017
+- **Health Check**: http://localhost:3000/health
+- **MongoDB**: localhost:27017 (admin/admin123)
+
+**Para mais detalhes sobre Docker, veja**: [DOCKER_SETUP.md](./DOCKER_SETUP.md)
+
+**Comandos úteis:**
+```bash
+# Ver logs
+docker-compose logs -f
+
+# Parar serviços
+docker-compose down
+
+# Limpar tudo (incluindo volumes)
+docker-compose down -v
+```
 
 ### Opção 2: Localmente (Desenvolvimento)
 
@@ -133,7 +156,9 @@ npm run test:cov
 
 ## 🎯 Status da Implementação
 
-**Backend**: 5/5 fases completas (100%) ✅
+**Backend**: 6/6 fases completas (100%) ✅
+**Frontend**: 6/9 fases completas (67%) ✅
+**Docker**: Configurado e funcional ✅
 
 ### ✅ Fase 1 - Setup Inicial Backend (COMPLETO)
 - [x] Estrutura de diretórios criada
@@ -183,10 +208,55 @@ npm run test:cov
 - [x] Integração completa (Messages + AI)
 - [x] ChatModule integrado ao AppModule
 
-### 🔄 Próximas Fases
-- [ ] Fase 6 - Testes Unitários e E2E
-- [ ] Fase 7 - Frontend (React + Vite)
-- [ ] Fase 8 - Docker & Deploy
+### ✅ Fase 6 - Testes Unitários (COMPLETO)
+- [x] 50 testes unitários implementados
+- [x] ConversationsService (13 testes)
+- [x] MessagesService (15 testes)
+- [x] AIService (6 testes)
+- [x] ChatService (16 testes)
+- [x] 100% de sucesso nos testes
+
+---
+
+**Frontend**: 6/9 fases completas (67%) ✅
+
+### ✅ Fase 1 & 2 - Setup + TailwindCSS (COMPLETO)
+- [x] Vite + React 19 + TypeScript configurado
+- [x] TailwindCSS v3 configurado
+- [x] Dependências instaladas
+- [x] Path aliases configurados
+- [x] Animações customizadas
+
+### ✅ Fase 3 - API Client (COMPLETO)
+- [x] Axios client com interceptors
+- [x] Conversations API (8 endpoints)
+- [x] Messages API (6 endpoints)
+- [x] TypeScript types completos
+
+### ✅ Fase 4 - WebSocket Integration (COMPLETO)
+- [x] Socket.io client configurado
+- [x] SocketService (connection manager)
+- [x] ChatSocket (event wrapper)
+- [x] Reconnection automático
+
+### ✅ Fase 5 - UI Components (COMPLETO)
+- [x] 14 componentes React
+- [x] UI básicos (4)
+- [x] Chat components (5)
+- [x] Conversation components (3)
+- [x] Layout components (3)
+
+### ✅ Fase 6 - Pages & Routing (COMPLETO)
+- [x] React Router v7
+- [x] HomePage (lista de conversas)
+- [x] ConversationPage (chat completo)
+- [x] NotFoundPage (404)
+- [x] WebSocket real-time funcionando
+
+### 🔄 Fases Restantes (Opcionais)
+- [ ] Fase 7 - Estado Global e Hooks
+- [ ] Fase 8 - Polimento e UX
+- [x] Fase 9 - Docker e Build ✅
 
 ## 📊 Recursos Implementados
 

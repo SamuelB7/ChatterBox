@@ -1,19 +1,34 @@
 version: '3.8'
 
 services:
+  # ============================================================================
+  # MongoDB Database
+  # ============================================================================
   mongodb:
     image: mongo:7
     container_name: chatterbox-mongodb
     restart: unless-stopped
     ports:
       - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: chatterbox
     volumes:
       - mongodb_data:/data/db
-    environment:
-      MONGO_INITDB_DATABASE: chatterbox
+      - mongodb_config:/data/configdb
     networks:
       - chatterbox-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
+  # ============================================================================
+  # Backend API (NestJS)
+  # ============================================================================
   api:
     build:
       context: ./apps/api
@@ -23,22 +38,71 @@ services:
     ports:
       - '3000:3000'
     environment:
+      # Application
       NODE_ENV: production
       PORT: 3000
-      MONGODB_URI: mongodb://mongodb:27017/chatterbox
+
+      # MongoDB (with authentication)
+      MONGODB_URI: mongodb://admin:admin123@mongodb:27017/chatterbox?authSource=admin
       MONGODB_DB_NAME: chatterbox
+
+      # Google Gemini AI
       GEMINI_API_KEY: ${GEMINI_API_KEY}
-      GEMINI_MODEL: gemini-pro
-      CORS_ORIGIN: http://localhost:5173
-      WS_CORS_ORIGIN: http://localhost:5173
+      GEMINI_MODEL: gemini-1.5-flash
+
+      # CORS
+      CORS_ORIGIN: http://localhost:5173,http://localhost
+      WS_CORS_ORIGIN: http://localhost:5173,http://localhost
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     networks:
       - chatterbox-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
 
-volumes:
-  mongodb_data:
+  # ============================================================================
+  # Frontend Web (React + Vite)
+  # ============================================================================
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: chatterbox-web
+    restart: unless-stopped
+    ports:
+      - '5173:80'
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - chatterbox-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
 
+# ============================================================================
+# Networks
+# ============================================================================
 networks:
   chatterbox-network:
     driver: bridge
+    name: chatterbox-network
+
+# ============================================================================
+# Volumes
+# ============================================================================
+volumes:
+  mongodb_data:
+    driver: local
+    name: chatterbox-mongodb-data
+  mongodb_config:
+    driver: local
+    name: chatterbox-mongodb-config
