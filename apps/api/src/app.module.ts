@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConversationsModule } from './conversations/conversations.module';
 import { MessagesModule } from './messages/messages.module';
+import { AIModule } from './ai/ai.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -27,8 +29,8 @@ import { MessagesModule } from './messages/messages.module';
     // Feature modules
     ConversationsModule,
     MessagesModule,
-    // AIModule,
-    // ChatModule,
+    AIModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
