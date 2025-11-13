@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConversationsModule } from './conversations/conversations.module';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { ConversationsModule } from './conversations/conversations.module';
 
     // Feature modules
     ConversationsModule,
-    // MessagesModule,
+    MessagesModule,
     // AIModule,
     // ChatModule,
   ],

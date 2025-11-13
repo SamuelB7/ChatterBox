@@ -145,8 +145,17 @@ npm run test:cov
 - [x] Swagger documentation
 - [x] 7 endpoints funcionais
 
+### ✅ Fase 3 - Módulo de Mensagens (COMPLETO)
+- [x] Message Schema (MongoDB)
+- [x] DTOs (Send, Response, Paginated)
+- [x] MessageRepository (8 métodos)
+- [x] MessagesService (7 métodos)
+- [x] MessagesController (4 endpoints REST)
+- [x] MessagesModule
+- [x] Integração com ConversationsModule
+- [x] Auto-increment messageCount
+
 ### 🔄 Próximas Fases
-- [ ] Fase 3 - Módulo de Mensagens
 - [ ] Fase 4 - Integração Google Gemini AI
 - [ ] Fase 5 - WebSocket Gateway
 - [ ] Fase 6 - Testes Unitários
