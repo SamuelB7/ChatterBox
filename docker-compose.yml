@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: chatterbox-mongodb
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: chatterbox
+    networks:
+      - chatterbox-network
+
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: chatterbox-api
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      MONGODB_URI: mongodb://mongodb:27017/chatterbox
+      MONGODB_DB_NAME: chatterbox
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GEMINI_MODEL: gemini-pro
+      CORS_ORIGIN: http://localhost:5173
+      WS_CORS_ORIGIN: http://localhost:5173
+    depends_on:
+      - mongodb
+    networks:
+      - chatterbox-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  chatterbox-network:
+    driver: bridge
