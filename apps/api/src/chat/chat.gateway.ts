@@ -9,6 +9,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ChatService } from './chat.service';
 
 interface JoinConversationPayload {
@@ -20,9 +21,22 @@ interface SendMessagePayload {
   message: string;
 }
 
+// Parse allowed CORS origins from environment variable
+const configService = new ConfigService();
+const allowedWsOrigins = configService
+  .get<string>('WS_CORS_ORIGIN', 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim());
+
 @WebSocketGateway({
   cors: {
-    origin: 'http://localhost:5173',
+    origin: (origin: string, callback: (err: Error | null, allow?: boolean) => void) => {
+      if (!origin || allowedWsOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   },
   namespace: '/chat',

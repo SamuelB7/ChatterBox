@@ -15,9 +15,16 @@ async function bootstrap() {
   // Global prefix
   app.setGlobalPrefix(apiPrefix);
 
-  // CORS
+  // CORS - Parse allowed origins from comma-separated string
+  const allowedOrigins = configService
+    .get<string>('CORS_ORIGIN', 'http://localhost:5173')
+    .split(',')
+    .map((origin) => origin.trim());
+
+  console.log('🔒 CORS allowed origins:', allowedOrigins);
+
   app.enableCors({
-    origin: configService.get<string>('CORS_ORIGIN', 'http://localhost:5173'),
+    origin: allowedOrigins,
     credentials: true,
   });
 
