@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConversationsModule } from './conversations/conversations.module';
 
 @Module({
   imports: [
@@ -22,8 +23,8 @@ import { AppService } from './app.service';
       }),
     }),
 
-    // Feature modules will be added here
-    // ConversationsModule,
+    // Feature modules
+    ConversationsModule,
     // MessagesModule,
     // AIModule,
     // ChatModule,

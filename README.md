@@ -135,8 +135,17 @@ npm run test:cov
 - [x] Scripts npm configurados
 - [x] Build testado e funcionando
 
+### ✅ Fase 2 - Módulo de Conversas (COMPLETO)
+- [x] Conversation Schema (MongoDB)
+- [x] DTOs (Create, Response, Paginated)
+- [x] ConversationRepository (Repository Pattern)
+- [x] ConversationsService (8 métodos)
+- [x] ConversationsController (7 endpoints REST)
+- [x] ConversationsModule
+- [x] Swagger documentation
+- [x] 7 endpoints funcionais
+
 ### 🔄 Próximas Fases
-- [ ] Fase 2 - Módulo de Conversas
 - [ ] Fase 3 - Módulo de Mensagens
 - [ ] Fase 4 - Integração Google Gemini AI
 - [ ] Fase 5 - WebSocket Gateway
