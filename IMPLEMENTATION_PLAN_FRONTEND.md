@@ -429,7 +429,7 @@ export default {
 
 ---
 
-## 🌐 Fase 3: Serviços e API Client
+## ✅ Fase 3: Serviços e API Client [COMPLETO]
 
 ### 3.1 Criar Types
 
@@ -1532,7 +1532,7 @@ docker run -p 5173:80 chatterbox-web
 
 - [x] Fase 1: Setup inicial (Vite + React + TypeScript) ✅
 - [x] Fase 2: TailwindCSS configurado ✅
-- [ ] Fase 3: API client (Axios) configurado
+- [x] Fase 3: API client (Axios) configurado ✅
 - [ ] Fase 4: WebSocket (Socket.io) integrado
 - [ ] Fase 5: Componentes de UI criados
 - [ ] Fase 6: Páginas criadas (Home + Conversation)
@@ -1546,7 +1546,7 @@ docker run -p 5173:80 chatterbox-web
 ## 📊 Status Atual do Frontend
 
 **Data de Início**: 2025-11-13
-**Status**: **Em Progresso** (2/9 fases completas - 22%)
+**Status**: **Em Progresso** (3/9 fases completas - 33%)
 
 ### ✅ Fase 1 - Setup Inicial (COMPLETO)
 - Vite + React 18 + TypeScript configurado
@@ -1562,8 +1562,16 @@ docker run -p 5173:80 chatterbox-web
 - Tema customizado (primary colors, Inter font)
 - Build com Tailwind funcionando
 
+### ✅ Fase 3 - Serviços e API Client (COMPLETO)
+- Axios client configurado com interceptors
+- TypeScript types para API (Conversation, Message, ApiError)
+- Conversations API (8 endpoints: create, getAll, getById, updateTitle, archive, unarchive, delete, getStats)
+- Messages API (6 endpoints: send, getByConversation, getById, getLastMessage, getHistory, delete)
+- Error handling com getErrorMessage() e isErrorStatus()
+- Centralized exports via index.ts
+- Build e lint passando sem erros
+
 ### ⏳ Próximas Fases
-- Fase 3: Serviços e API Client
 - Fase 4: WebSocket Integration
 - Fase 5: Componentes de UI
 - Fase 6: Páginas (HomePage, ConversationPage)
@@ -1573,8 +1581,9 @@ docker run -p 5173:80 chatterbox-web
 
 ---
 
-**Versão:** 1.1 (Fase 1 e 2 Completas)
+**Versão:** 1.2 (Fases 1, 2 e 3 Completas)
 **Última atualização:** 2025-11-13
-**Stack:** React 18 + Vite 5 + TailwindCSS 3 + Socket.io Client 4
-**Build Status**: ✅ Passing
+**Stack:** React 18 + Vite 7 + TailwindCSS 3 + Socket.io Client 4 + Axios 1
+**Build Status**: ✅ Passing (1.14s)
+**Lint Status**: ✅ Passing
 **Total Dependências**: 308 packages
