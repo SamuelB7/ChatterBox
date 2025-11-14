@@ -10,6 +10,7 @@ import type {
   UpdateConversationTitleDto,
   ConversationStats,
   GetConversationsQuery,
+  PaginatedConversationsResponse,
 } from '@/types/api.types';
 
 /**
@@ -29,8 +30,8 @@ export const conversationsApi = {
    * Get all conversations with optional filters
    * GET /conversations?status=active&limit=50
    */
-  async getAll(query?: GetConversationsQuery): Promise<Conversation[]> {
-    const response = await apiClient.get<Conversation[]>('/conversations', {
+  async getAll(query?: GetConversationsQuery): Promise<PaginatedConversationsResponse> {
+    const response = await apiClient.get<PaginatedConversationsResponse>('/conversations', {
       params: query,
     });
     return response.data;

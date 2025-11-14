@@ -26,7 +26,7 @@ export function HomePage() {
     try {
       setIsLoading(true);
       const data = await conversationsApi.getAll({ status: 'active' });
-      setConversations(data);
+      setConversations(data.conversations);
     } catch (error) {
       console.error('Error loading conversations:', error);
     } finally {

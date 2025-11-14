@@ -9,6 +9,7 @@ import type {
   SendMessageDto,
   ConversationHistory,
   GetMessagesQuery,
+  PaginatedMessagesResponse,
 } from '@/types/api.types';
 
 /**
@@ -26,15 +27,18 @@ export const messagesApi = {
 
   /**
    * Get all messages in a conversation
-   * GET /messages/:conversationId?limit=50&offset=0
+   * GET /conversations/:conversationId/messages?limit=50&page=1
    */
   async getByConversation(
     conversationId: string,
     query?: GetMessagesQuery,
-  ): Promise<Message[]> {
-    const response = await apiClient.get<Message[]>(`/messages/${conversationId}`, {
-      params: query,
-    });
+  ): Promise<PaginatedMessagesResponse> {
+    const response = await apiClient.get<PaginatedMessagesResponse>(
+      `/conversations/${conversationId}/messages`,
+      {
+        params: query,
+      },
+    );
     return response.data;
   },
 

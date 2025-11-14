@@ -72,6 +72,24 @@ export interface PaginatedResponse<T> {
   limit: number;
 }
 
+export interface PaginationInfo {
+  total: number;
+  page: number;
+  limit: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
+
+export interface PaginatedConversationsResponse {
+  conversations: Conversation[];
+  pagination: PaginationInfo;
+}
+
+export interface PaginatedMessagesResponse {
+  messages: Message[];
+  pagination: PaginationInfo;
+}
+
 // ============================================================================
 // Query Parameters
 // ============================================================================

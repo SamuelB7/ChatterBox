@@ -48,7 +48,7 @@ export function ConversationPage() {
   const loadConversations = async () => {
     try {
       const data = await conversationsApi.getAll({ status: 'active' });
-      setConversations(data);
+      setConversations(data.conversations);
     } catch (error) {
       console.error('Error loading conversations:', error);
     }
@@ -67,7 +67,7 @@ export function ConversationPage() {
     try {
       setIsLoading(true);
       const data = await messagesApi.getByConversation(conversationId);
-      setMessages(data);
+      setMessages(data.messages);
     } catch (error) {
       console.error('Error loading messages:', error);
     } finally {
