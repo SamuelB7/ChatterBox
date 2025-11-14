@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import {
   FLAT_EARTH_SYSTEM_PROMPT,
   buildConversationContext,
@@ -24,9 +24,7 @@ export interface AIResponse {
 @Injectable()
 export class AIService {
   private readonly logger = new Logger(AIService.name);
-  private genAI: GoogleGenerativeAI;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private model: any; // Gemini SDK não exporta tipo específico do model
+  private genAI: GoogleGenAI;
   private readonly modelName: string;
 
   constructor(private configService: ConfigService) {
@@ -39,13 +37,10 @@ export class AIService {
       throw new Error('GEMINI_API_KEY is not configured. Please set it in your .env file.');
     }
 
-    this.modelName = this.configService.get<string>('GEMINI_MODEL', 'gemini-pro');
+    this.modelName = this.configService.get<string>('GEMINI_MODEL', 'gemini-2.0-flash');
 
     try {
-      this.genAI = new GoogleGenerativeAI(apiKey);
-      this.model = this.genAI.getGenerativeModel({
-        model: this.modelName,
-      });
+      this.genAI = new GoogleGenAI({ apiKey });
       this.logger.log(`✅ Google Gemini AI initialized with model: ${this.modelName}`);
     } catch (error) {
       this.logger.error('❌ Failed to initialize Google Gemini AI:', error);
@@ -79,10 +74,13 @@ export class AIService {
         `Gerando resposta para conversa com ${conversationHistory.length} mensagens`,
       );
 
-      // Gerar resposta
-      const result = await this.model.generateContent(prompt);
-      const response = result.response;
-      const text = response.text();
+      // Gerar resposta usando a nova API
+      const response = await this.genAI.models.generateContent({
+        model: this.modelName,
+        contents: prompt,
+      });
+
+      const text = response.text || '';
 
       const processingTime = Date.now() - startTime;
 
@@ -127,11 +125,17 @@ export class AIService {
         `Iniciando streaming de resposta para conversa com ${conversationHistory.length} mensagens`,
       );
 
-      const result = await this.model.generateContentStream(prompt);
+      // Usar a nova API de streaming
+      const response = await this.genAI.models.generateContentStream({
+        model: this.modelName,
+        contents: prompt,
+      });
 
-      for await (const chunk of result.stream) {
-        const chunkText = chunk.text();
-        yield chunkText;
+      for await (const chunk of response) {
+        const chunkText = chunk.text || '';
+        if (chunkText) {
+          yield chunkText;
+        }
       }
 
       this.logger.log('✅ Streaming de resposta concluído');
@@ -163,7 +167,10 @@ export class AIService {
       }
 
       // Teste simples
-      await this.model.generateContent('Hello');
+      await this.genAI.models.generateContent({
+        model: this.modelName,
+        contents: 'Hello',
+      });
 
       return {
         status: 'ok',
