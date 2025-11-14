@@ -160,4 +160,11 @@ export class ChatService {
       return false;
     }
   }
+
+  /**
+   * Buscar uma mensagem por ID (helper para o Gateway)
+   */
+  async getMessageById(messageId: string) {
+    return this.messagesService.findById(messageId);
+  }
 }

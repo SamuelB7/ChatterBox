@@ -174,11 +174,13 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         } else if (event.type === 'complete') {
           // Emitir resposta completa
           const result = JSON.parse(event.data as string);
+
+          // Buscar a mensagem completa do banco de dados
+          const assistantMessage = await this.chatService.getMessageById(result.assistantMessageId);
+
           client.emit('ai:response:complete', {
             conversationId,
-            messageId: result.assistantMessageId,
-            content: result.content,
-            processingTime: result.processingTime,
+            message: assistantMessage,
           });
 
           // Parar indicador de "está digitando"
