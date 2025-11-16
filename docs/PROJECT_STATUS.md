@@ -194,7 +194,7 @@ ChatterBox/
 ### Arquivos Criados
 - `package.json`, `tsconfig.json`, `nest-cli.json`
 - `.env`, `.env.example`
-- `docker-compose.yml`
+- `docker compose .yml`
 - `src/main.ts`, `src/app.module.ts`
 
 ## 🎯 Fase 2 - Conversations Module ✅
@@ -397,7 +397,7 @@ socket.on('error', data);
 **Tarefas**:
 - [ ] Dockerfile multi-stage (backend)
 - [ ] Dockerfile (frontend)
-- [ ] docker-compose para produção
+- [ ] docker compose para produção
 - [ ] Environment configs (dev/staging/prod)
 - [ ] CI/CD pipeline (opcional)
 - [ ] Deploy instructions
@@ -442,7 +442,7 @@ npm run test:e2e           # E2E tests (Fase 6)
 npm run test:cov           # Coverage (Fase 6)
 
 # Database
-docker-compose up -d       # MongoDB
+docker compose  up -d       # MongoDB
 ```
 
 ## 📚 Documentação
@@ -509,7 +509,7 @@ cp .env.example .env
 # Editar .env e adicionar GEMINI_API_KEY
 
 # Iniciar MongoDB
-docker-compose up -d
+docker compose  up -d
 
 # Iniciar servidor
 npm run start:dev

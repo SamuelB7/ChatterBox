@@ -9,11 +9,8 @@ ChatterBox/
 ├── apps/
 │   ├── api/                    # Backend (NestJS + MongoDB)
 │   └── web/                    # Frontend (React + Vite) - A ser implementado
-├── docs/                       # Documentação
-│   ├── DTOS_CONTRACTS.md       # Contratos de API e DTOs
-│   ├── IMPLEMENTATION_PLAN_BACKEND.md
-│   └── IMPLEMENTATION_PLAN_FRONTEND.md
-├── docker-compose.yml          # Orquestração de containers
+├── docs/                       # Documentações técnicas e resumos das fases
+├── docker compose .yml          # Orquestração de containers
 └── README.md
 ```
 
@@ -62,12 +59,22 @@ cp .env.example .env
 cd apps/api
 cp .env.example .env
 # Editar .env se necessário
+
+# Frontend
+cd apps/web
+cp .env.example .env
+# Editar .env se necessário
 ```
 
-### 3. Instalar dependências do backend
+### 3. Instalar dependências
 
 ```bash
+# Backend
 cd apps/api
+npm install
+
+# Frontend
+cd apps/web
 npm install
 ```
 
@@ -79,10 +86,10 @@ npm install
 
 ```bash
 # Na raiz do projeto
-docker-compose up --build
+docker compose up --build
 
 # Ou em background (detached mode)
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 **Serviços disponíveis:**
@@ -97,13 +104,13 @@ docker-compose up -d --build
 **Comandos úteis:**
 ```bash
 # Ver logs
-docker-compose logs -f
+docker compose  logs -f
 
 # Parar serviços
-docker-compose down
+docker compose  down
 
 # Limpar tudo (incluindo volumes)
-docker-compose down -v
+docker compose  down -v
 ```
 
 ### Opção 2: Localmente (Desenvolvimento)
@@ -142,17 +149,10 @@ npm run test:cov
 
 ## 📖 Documentação Técnica
 
-- **[PROJECT_STATUS.md](./PROJECT_STATUS.md)** - Status geral do projeto e progresso de todas as fases
-- **[DTOS_CONTRACTS.md](./DTOS_CONTRACTS.md)** - Contratos de API, DTOs e eventos WebSocket
-- **[IMPLEMENTATION_PLAN_BACKEND.md](./IMPLEMENTATION_PLAN_BACKEND.md)** - Plano detalhado do backend
-- **[IMPLEMENTATION_PLAN_FRONTEND.md](./IMPLEMENTATION_PLAN_FRONTEND.md)** - Plano detalhado do frontend
-
-### Documentação das Fases
-- **[PHASE_1_SUMMARY.md](./PHASE_1_SUMMARY.md)** / **[CHECKLIST](./PHASE_1_CHECKLIST.md)** - Setup Backend
-- **[PHASE_2_SUMMARY.md](./PHASE_2_SUMMARY.md)** / **[CHECKLIST](./PHASE_2_CHECKLIST.md)** - Conversations Module
-- **[PHASE_3_SUMMARY.md](./PHASE_3_SUMMARY.md)** / **[CHECKLIST](./PHASE_3_CHECKLIST.md)** - Messages Module
-- **[PHASE_4_SUMMARY.md](./PHASE_4_SUMMARY.md)** / **[CHECKLIST](./PHASE_4_CHECKLIST.md)** - Google Gemini AI
-- **[PHASE_5_SUMMARY.md](./PHASE_5_SUMMARY.md)** / **[CHECKLIST](./PHASE_5_CHECKLIST.md)** - WebSocket Gateway
+- **[PROJECT_STATUS.md](./docs/PROJECT_STATUS.md)** - Status geral do projeto e progresso de todas as fases
+- **[DTOS_CONTRACTS.md](./docs/DTOS_CONTRACTS.md)** - Contratos de API, DTOs e eventos WebSocket
+- **[IMPLEMENTATION_PLAN_BACKEND.md](./docs/IMPLEMENTATION_PLAN_BACKEND.md)** - Plano detalhado do backend
+- **[IMPLEMENTATION_PLAN_FRONTEND.md](./docs/IMPLEMENTATION_PLAN_FRONTEND.md)** - Plano detalhado do frontend
 
 ## 🎯 Status da Implementação
 
@@ -166,7 +166,7 @@ npm run test:cov
 - [x] TypeScript, ESLint e Prettier configurados
 - [x] MongoDB integrado via Mongoose
 - [x] Swagger configurado
-- [x] Docker e docker-compose configurados
+- [x] Docker e docker compose  configurados
 - [x] Scripts npm configurados
 - [x] Build testado e funcionando
 
@@ -306,19 +306,19 @@ npm run test:cov
 
 ```bash
 # Iniciar todos os serviços
-docker-compose up -d
+docker compose  up -d
 
 # Ver logs
-docker-compose logs -f api
+docker compose  logs -f api
 
 # Parar serviços
-docker-compose down
+docker compose  down
 
 # Rebuild
-docker-compose up -d --build
+docker compose  up -d --build
 
 # Remover volumes
-docker-compose down -v
+docker compose  down -v
 ```
 
 ## 🛠️ Comandos de Desenvolvimento
@@ -351,25 +351,7 @@ npm run format
 - [x] **IA**: Sistema usa Google Gemini para responder
 - [x] **Objetivo**: IA tenta convencer que a Terra é plana
 - [x] **WebSocket**: Mensagens em tempo real com streaming
-- [ ] **Frontend**: Interface React com chat em tempo real
-- [ ] **Testes**: Unit tests e E2E tests
 
 ## ⚠️ Nota Importante
 
 Este projeto é uma **prova de conceito técnica**. O objetivo de convencer o usuário de que a Terra é plana é **apenas para demonstração** das capacidades de conversação da IA. Na realidade, a Terra é esférica, confirmada por evidências científicas robustas.
-
-## 🤝 Contribuindo
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-ISC
-
-## 👥 Autor
-
-Desenvolvido como parte do desafio técnico ChatterBox 2.0.

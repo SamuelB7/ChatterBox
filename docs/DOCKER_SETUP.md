@@ -51,20 +51,14 @@ Adicione sua chave API do Google Gemini:
 GEMINI_API_KEY=sua_chave_aqui
 ```
 
-**Como obter a chave**:
-1. Acesse: https://makersuite.google.com/app/apikey
-2. Faça login com sua conta Google
-3. Clique em "Create API Key"
-4. Copie a chave gerada
-
 ### 3. Rodar a Aplicação
 
 ```bash
 # Construir e iniciar todos os serviços
-docker-compose up --build
+docker compose up --build
 
 # Ou em modo detached (background)
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### 4. Acessar a Aplicação
@@ -124,39 +118,39 @@ Aguarde alguns segundos para os serviços iniciarem, então acesse:
 ### Visualizar Logs
 ```bash
 # Todos os serviços
-docker-compose logs -f
+docker compose logs -f
 
 # Serviço específico
-docker-compose logs -f web
-docker-compose logs -f api
-docker-compose logs -f mongodb
+docker compose logs -f web
+docker compose logs -f api
+docker compose logs -f mongodb
 ```
 
 ### Parar a Aplicação
 ```bash
 # Parar serviços (mantém volumes)
-docker-compose stop
+docker compose stop
 
 # Parar e remover containers (mantém volumes)
-docker-compose down
+docker compose down
 
 # Parar, remover containers E volumes (limpa tudo)
-docker-compose down -v
+docker compose down -v
 ```
 
 ### Reconstruir Serviços
 ```bash
 # Reconstruir tudo
-docker-compose up --build
+docker compose up --build
 
 # Reconstruir apenas um serviço
-docker-compose up --build web
-docker-compose up --build api
+docker compose up --build web
+docker compose up --build api
 ```
 
 ### Ver Status dos Serviços
 ```bash
-docker-compose ps
+docker ps
 ```
 
 ### Acessar Shell do Container
