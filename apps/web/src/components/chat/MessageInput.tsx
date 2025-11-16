@@ -3,8 +3,8 @@
  * Input field for sending messages
  */
 
-import { useState, type KeyboardEvent, type FormEvent } from 'react';
 import { Send } from 'lucide-react';
+import { useState, type FormEvent, type KeyboardEvent } from 'react';
 import { Button } from '../ui/Button';
 
 export interface MessageInputProps {
@@ -53,9 +53,7 @@ export function MessageInput({
         </Button>
       </div>
       <p className="text-xs text-gray-500 mt-2">
-        Pressione <kbd className="px-1 py-0.5 bg-gray-100 border border-gray-300 rounded">Enter</kbd>{' '}
-        para enviar, <kbd className="px-1 py-0.5 bg-gray-100 border border-gray-300 rounded">Shift + Enter</kbd>{' '}
-        para nova linha
+        Pressione <kbd className="px-1 py-0.5 bg-gray-100 border border-gray-300 rounded">Enter</kbd> para enviar a mensagem
       </p>
     </form>
   );
