@@ -8,7 +8,7 @@ Sistema de conversação com IA desenvolvido com NestJS, MongoDB e Google Gemini
 ChatterBox/
 ├── apps/
 │   ├── api/                    # Backend (NestJS + MongoDB)
-│   └── web/                    # Frontend (React + Vite) - A ser implementado
+│   └── web/                    # Frontend (React + Vite)
 ├── docs/                       # Documentações técnicas e resumos das fases
 ├── docker compose .yml          # Orquestração de containers
 └── README.md
