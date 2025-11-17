@@ -102,7 +102,7 @@ docker compose up -d --build
 - **Health Check**: http://localhost:3000/health
 - **MongoDB**: localhost:27017 (admin/admin123)
 
-**Para mais detalhes sobre Docker, veja**: [DOCKER_SETUP.md](./DOCKER_SETUP.md)
+**Para mais detalhes sobre Docker, veja**: [DOCKER_SETUP.md](./docs/DOCKER_SETUP.md)
 
 **Comandos úteis:**
 ```bash
