@@ -85,7 +85,10 @@ npm install
 **Rode toda a aplicação (frontend + backend + banco) com um único comando:**
 
 ```bash
-# Na raiz do projeto
+#Na raiz do projeto, crie um .env com a variável GEMINI_API_KEY antes de rodar o docker compose
+cp .env.example .env
+
+#Rodar o docker compose
 docker compose up --build
 
 # Ou em background (detached mode)
